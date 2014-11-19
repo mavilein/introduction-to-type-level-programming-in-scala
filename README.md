@@ -21,8 +21,11 @@ You need to have scala and sbt installed. Just execute `sbt run` in the project 
 
 ## Motivation - Why does Type Level Programming matter?
 Currently we are not getting the most out of our compilers. We rely mostly on simple type checking. For example we are not allowed to pass an Int to a method, which expects a String. As type level programmers we want to have more properties checked at the type level. 
+
 On slide 1-1 you can see the problem that is solved during the talk. We see how 2 lists are created (a simple custom implementation), where each list contains 2 ints. Then the + method is called on those lists, which adds the elements of the both lists together. Unfortunately this can only work if the lists have the same size. Therefore it throws a RuntimeException when we add list with not the same size. The end of the talk we will have enhanced this implementation so that it does not compile.
+
 Because we can clearly see that we trying to add a 2 element list and a 1 element list. That can never work. The compiler should spot that error for us!
+
 The message is: We want to write our programs in a way, that makes us very confident it will work, once it compiles - In Types we trust!
 
 ## How & What we will learn
@@ -35,6 +38,7 @@ We will explore 3 simple examples:
 ## Our own Bool Type
 On slide 3-1 we can see how we can implement our own custom Boolean at the Value Level. On slide 3-2 we can see a slightly more complicated version of the Boolean. We replaced the implementation of and with a more complicated one. This is not needed, but i wanted to have a more complicated method, that gets translated.
 On slide 3-3 we see our first translation side by side. Instead of methods with the keyword def, we now use the keyword type. Our computations happen at compile instead of runtime. As type level programmers we produce types, not values. Instead of a normal type annotation we now use type bounds (<:). And instead of paramaters lists, we now use square brackets. If you want to formulate precisely, we defined some abstract types. Each type was defined with a type bound (<:). The or type is a so called type constructor, because we have to pass a type to it before we can construct an actual type. 
+
 This may seem all very complicated, but in the end you can just follow those simple translation rules.
 
 On slide 3-4 we can see how the False gets translated. The only thing that is really new in this case, is that we need to omit the return type (type bound), when we implement the abstract types. Otherwise it won't compile.
@@ -70,6 +74,7 @@ Slide 5-4 shows how can translate it. We can see that size method has been remov
 Slide 5-5 shows that the implementation is greatly simplified. We removed quite a lot of code and the only important thing, was to add the Zero Type to the types where needed.
 
 On slide 5-6 we can see the modified Cons implementation. It is a little bit tricky at first sight. ConsIntList declares a type called SizeTail. The tail of this cons cell has to have this type. The actual size of this cons cell can be seen on the extends declaration, where we say that the actual size is the successor of SizeTail. This a little weird at first, but this is because we can count only upwards with Peano Numbers. As an example: What we express here could mean -> We have List with SizeTail of 3, the tail IntList then has to have 3, while this ConsCell has Size 3+1. 
+
 Hopefully this was somehow clear. This is difficult to explain in written text :)
 And if we look finally at the + implementation nothing really has changed here. We just have to declare that the other list has to have the same size this Cons cell.
 The slide shows a hard to read screenshot of a compiler warning as an interesting detail. In the value level implementation, we get a compiler warning for a non exhaustive match, because the compiler can't know it's not possible to reach the pattern matching with a IntNil (because of the require before). But with the Type Level implementation this warning is not that there anymore. The Compiler had enough information now to infer this fact! We moved this property from the Value Level to the Type Level.
