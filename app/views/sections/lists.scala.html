@@ -1,0 +1,82 @@
+<section>
+	<h1>Solving our List Problem</h1>
+	<p>Or: Combine Value and Type Level</p>
+	<p>Or: How to constrain your Value Level Programs</p>
+	@notesMd{
+		* everything happened at compile time so far
+		* but maybe even type level programs want to have a running program?
+	}
+</section>
+
+<section>
+	<h2>The Usecase</h2>
+	
+	<!-- <img src="https://www.dropbox.com/s/8r36j26z8yaasla/Screenshot%202014-11-13%2019.24.18.png?dl=1" />
+	<div class="fragment">
+		<p>We can do better than that!</p>
+		<img src="https://www.dropbox.com/s/lb0ko9zwnn7unjw/Screenshot%202014-11-13%2019.28.45.png?dl=1" />
+	</div>		 -->
+	<img src="https://www.dropbox.com/s/gib1vb5xmubymog/Screenshot%202014-11-17%2011.16.25.png?dl=1" />
+	<p>We can do better than that!</p>
+</section>	
+
+<section>
+	<h2>Lists in Functional Languages</h2>
+	<img src="/assets/images/Lists.jpg" />
+</section>	
+
+<section>
+	<h2>Starting at the Value Level</h2>
+	@includeCode("app/list/Lists.scala", "list-trait-val")
+	@includeCode("app/list/Lists.scala", "nil-val")
+	@includeCode("app/list/Lists.scala", "cons-val")
+
+	@notesMd{
+		* yeah we could implement everything in the trait, but this way it is easier to transport to type level
+	}
+</section>
+
+<section>
+	<h2>The translation #1</h2>
+	@includeCode("app/list/Lists.scala", "list-trait-val")
+	@includeCode("app/list/Lists.scala", "list-trait-type")
+	
+</section>
+
+<section>
+	<h2>The translation #2</h2>
+	@includeCode("app/list/Lists.scala", "nil-val")
+	@includeCode("app/list/Lists.scala", "nil-type")
+</section>
+
+<section>
+	<h2>The translation #3</h2>
+	@includeCode("app/list/Lists.scala", "cons-val")
+	@includeCode("app/list/Lists.scala", "cons-type")
+	<div class="fragment">
+		<p> An interesting detail: </p>
+		<img src="https://www.dropbox.com/s/86lul06pl1n6m5u/Screenshot%202014-11-18%2014.38.11.png?dl=1" />
+	</div>	
+</section>	
+
+<!-- <section>
+	<h2>REPL TIME</h2>
+	@notesMd{
+		- show compiler warnings for non exhaustive match
+		- show how to fix it for type level implementation
+	}
+</section>	 -->
+
+<section class="ultra-wide-slide">
+	<h2>Final Code</h2>
+	<div style="float:left; width: 49%;">
+		@includeCode("app/list/ListExamples.scala", "list-trait-val")
+		@includeCode("app/list/ListExamples.scala", "nil-val")
+		@includeCode("app/list/ListExamples.scala", "cons-val")
+	</div>	
+	<div style="float:left; width: 49%; margin-left: 5px;">
+		@includeCode("app/list/ListExamples.scala", "list-trait-type", "margin-bottom: 37px;")
+		@includeCode("app/list/ListExamples.scala", "nil-type", "margin-bottom: 80px;")
+		@includeCode("app/list/ListExamples.scala", "cons-type")
+	</div>
+</section>	

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="/assets/revealjs/css/reveal.min.css">
+    <link rel="stylesheet" href="/assets/revealjs/css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="/assets/revealjs/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+			document.write( '<link rel="stylesheet" href="/assets/revealjs/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <!--[if lt IE 9]>
+    <script src="/assets/revealjs/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- override reveal.js styles -->
+    <style>
+        .reveal pre {
+            width: 100%;
+        }
+        .reveal .slides>section>section.wide-slide{
+            width:1200px;
+            margin-left:-120px;
+        }
+        .reveal .slides>section>section.ultra-wide-slide{
+            width:1480px;
+            margin-left:-240px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+<section>
+    <h2>A Gentle Introduction <br/> to Type Level Programming <br/>in Scala</h2>
+    <p>
+        <small>Created by <a href="http://mavilein.github.io">Marcus Böhm</a> / <a href="http://twitter.com/mav1lein">@@mav1lein</a></small>
+    </p>
+</section>
+
+<section id="ch0">
+    @sections.motivation()
+</section>   
+
+<section id="ch1">
+    @sections.agenda()
+</section>   
+
+<section id="ch2">
+    @sections.bools()
+</section>
+
+<section id="ch3">
+    @sections.peanos()
+</section>
+
+<section id="ch4">
+    @sections.lists()
+</section>
+
+<!-- <section id="ch5">
+    <h2> Caveats </h2>
+    <h2> What we haven't covered yet </h2>
+</section>     -->
+
+<section id="finish">
+    @sections.finish()
+</section>
+
+</div>
+
+</div>
+
+<script src="/assets/revealjs/lib/js/head.min.js"></script>
+<script src="/assets/revealjs/js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        slideNumber: true,
+        //width: 1200,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: '/assets/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: '/assets/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/assets/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/assets/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '/assets/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: '/assets/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+
+   // helper convenience functions
+   function countChapterSections(chapterId){
+    return document.getElementById(chapterId).getElementsByTagName("section").length;
+   }
+   // navigate via click
+    window.addEventListener("mousedown", handleClick, false);
+    window.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
+     
+    function handleClick(e) {
+        e.preventDefault();
+        if(e.button === 0) Reveal.next(); 
+        if(e.button === 2) Reveal.prev(); 
+    }
+</script>
+
+</body>
+</html>

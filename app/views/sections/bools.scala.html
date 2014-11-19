@@ -1,0 +1,112 @@
+
+<section>
+	<h1>Our own Bool Type</h1>
+	<p>Or: The Hello World of Type Level Programming</p>
+</section>
+
+<section>
+	<h2>Starting at the Value Level</h2>
+    @includeCode("app/bool/BooleanExamples.scala", "bool-trait")
+    <div class="fragment">
+    	@includeCode("app/bool/BooleanExamples.scala", "bool-impl")
+    </div>	
+    <div class="fragment">
+    	@includeCode("app/bool/BooleanExamples.scala", "bool-ex1")
+    </div>	
+
+    @notesMd{
+    	* as i said: We will start out by looking at hopefully simple examples at the Value Level
+    	* trait somewhat like interfaces (multi inheritance, may have logic)
+    	* sealed not important here
+    	* methods are defined with def
+    	* return types are at the end of a method
+	}
+</section>
+
+<section>
+	<h2>Let's make it slightly more complicated</h2>
+	@includeCode("app/bool/BooleanExamples.scala", "bool-impl-2")
+	@notesMd{
+		* moved and-method to trait with a more complicated implementation
+		* i wanted to have a more complicated method to translate 
+	}
+</section>	
+
+<section>
+	<h2>The translation #1</h2>
+	@includeCode("app/bool/BooleanExamples.scala", "bool-val-trait-3")
+	@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
+
+    @rules(3)
+</section>
+
+<section>
+	<h2>The translation #2</h2>
+	@includeCode("app/bool/Bools.scala", "false-val")
+	@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
+	@includeCode("app/bool/Bools.scala", "false-type")	
+    
+    @rules(4)
+</section>
+
+<section>
+	<h2>The translation #3</h2>	
+	@includeCode("app/bool/Bools.scala", "boolean-trait-val")
+	@includeCode("app/bool/Bools.scala", "boolean-trait-type")
+	
+    @rules(6)
+</section>
+
+<section class="wide-slide">
+	<h2>Final Code</h2>
+	<div style="float:left; width: 48%;">
+        @includeCode("app/bool/BooleanExamples.scala", "bool-val-trait-4")   
+        @includeCode("app/bool/Bools.scala", "true-val")
+        @includeCode("app/bool/Bools.scala", "false-val")
+    </div>  
+    <div style="float:right; width: 48%;">
+		@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-4")	
+		@includeCode("app/bool/Bools.scala", "true-type")
+		@includeCode("app/bool/Bools.scala", "false-type")
+	</div>
+</section>	
+
+<section>
+    <h1> REPL Time <h1>
+    <img src="/assets/images/lets-get-the-party-started.jpg" />    
+    @notesMd{
+        * try: True#not
+        * does not work because REPL is value oriented
+        * instead: assign result to a type
+        * does not quite work: we need tests!
+    }
+</section>    
+
+<section class="wide-slide">
+    <h1> Some Tests </h1>
+    <div style="float:left; width: 48%;">
+        <p>on the Value Level: </p>
+        @includeCode("test/bool/BoolSpecs.scala", "boolean-val-spec-1")
+    </div>    
+    <div style="float:right; width: 48%;">
+        <div class="fragment">
+            <p>on the Type Level: </p>
+            @includeCode("test/bool/BoolSpecs.scala", "boolean-type-spec-1")
+        </div>
+        <div class="fragment">
+            <p>negative Tests </p>
+            @includeCode("test/bool/BoolSpecs.scala", "boolean-type-spec-2")
+        </div>
+    </div>    
+    @notesMd{
+        * we have to test our Types
+        * if it compiles we are fine
+        * how do we prove things that should not compile => try "implicitly[False#not =:= False]"
+        => Shapeless illTyped
+    }
+</section>    
+
+<section>
+    <h1>That's it for our Booleans</h1>
+</section>    
+

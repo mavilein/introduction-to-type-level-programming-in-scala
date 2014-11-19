@@ -1,0 +1,23 @@
+@(num : Int)
+<p><b> RULES </b></p>
+<ul>
+	<li><b>def x / val x @spaces(2) ==> type x</b></li>
+	@if(num >= 2) {
+		<li><b>x : T @spaces(20) ==> x <: T </b></li>
+	}
+	@if(num >= 3) {
+		<li><b>def foo(x : T) ==> type foo [x <: T]</b></li>
+	}
+	@if(num >= 4) {
+		<li>return type must be omitted</li>
+	}
+	@if(num >= 5) {
+		<li><b>this @spaces(20) ==> this.type </b></li>
+	}
+	@if(num >= 6) {
+		<li><b>x.foo @spaces(17) ==> x#foo </b></li>
+	}
+	@if(num >= 7) {
+		<li><b>new Clazz(x) ==> Clazz[x]</b></li>
+	}	
+</ul>
