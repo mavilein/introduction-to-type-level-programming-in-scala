@@ -46,9 +46,9 @@ object ListType {
   //#nil-type
   //#cons-type
   case class ConsIntList[SizeTail <: Peano](head: Int, tail: IntList[SizeTail]) 
-    extends IntList[PeanoN[SizeTail]] { 
+                                                extends IntList[PeanoN[SizeTail]] { 
 
-    def +(other: IntList[PeanoN[SizeTail]]) =
+    def +(other: IntList[PeanoN[SizeTail]]) = 
       other match {
         case ConsIntList(h, t) => (head + h) :: (tail + t)
       }

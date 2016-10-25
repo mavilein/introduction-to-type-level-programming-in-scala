@@ -12,7 +12,7 @@ object ListValExamples {
         //#list-trait-type
         sealed trait IntList[Size <: Peano]{
             def ::(head: Int): IntList[PeanoN[Size]] = 
-                ConsIntList(head, this) 
+                                            ConsIntList(head, this) 
             
             def +(other: IntList[Size]): IntList[Size]
         }
@@ -24,8 +24,8 @@ object ListValExamples {
         //#nil-type
         //#cons-type
         case class ConsIntList[SizeTail <: Peano]
-            (head: Int, tail: IntList[SizeTail]) 
-                extends IntList[PeanoN[SizeTail]] { 
+                               (head: Int, tail: IntList[SizeTail]) 
+                                extends IntList[PeanoN[SizeTail]] { 
 
             def +(other: IntList[PeanoN[SizeTail]]) =
               other match {
@@ -38,7 +38,7 @@ object ListValExamples {
         //#list-trait-val 
         sealed trait IntList {
             def ::(head: Int): IntList = 
-                ConsIntList(head, this)
+                                    ConsIntList(head, this)
             
             def +(other: IntList): IntList
             def size:Int 
@@ -55,10 +55,10 @@ object ListValExamples {
         //#nil-val
         //#cons-val 
         case class ConsIntList(head: Int, tail: IntList) 
-                                                    extends IntList {
-
+                                                extends IntList {
+            
             def +(other: IntList) = {
-              require(other.size == size, "other is not the same size!")
+              require(other.size == size, "other is !")
               other match {
                 case ConsIntList(h, t) => (head + h) :: (tail + t)
               }
