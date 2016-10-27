@@ -1,87 +1,89 @@
 <section>
-	<h1>Solving our List Problem</h1>
-	<p>Or: Combine Value and Type Level</p>
-	<p>Or: How to constrain your Value Level Programs</p>
-	@notesMd{
-		* everything happened at compile time so far
-		* but maybe even we want to write a program that actually runs?
-	}
+    <h1>Solving our List Problem</h1>
+    <p>Or: Combine Value and Type Level</p>
+    <p>Or: How to constrain your Value Level Programs</p>
+    @notesMd{
+        - everything happened at compile time so far
+        - but maybe even we want to write a program that actually runs?
+    }
 </section>
 
 <section>
-	<h2>The Usecase</h2>
-	<img src="/assets/images/motivation_our_problem.png" />
-	<p>We can do better than that!</p>
-</section>	
+    <h2>The Usecase</h2>
+    <img src="/assets/images/motivation_our_problem.png" />
+    <p>We can do better than that!</p>
+</section>  
 
 <section>
-	<h2>Lists in Functional Languages</h2>
-	<img src="/assets/images/Lists.jpg" />
-	@notesMd {
-		- many of you probably know that, but maybe you haven't come across it yet
-	}
-</section>	
+    <h2>Lists in Functional Languages</h2>
+    <img src="/assets/images/Lists.jpg" />
+    @notesMd {
+        - many of you probably know that, but maybe you haven't come across it yet
+    }
+</section>  
 
 <section>
-	<h2>Starting at the Value Level</h2>
-	@includeCode("app/list/Lists.scala", "list-trait-val")
-	@includeCode("app/list/Lists.scala", "nil-val")
-	@includeCode("app/list/Lists.scala", "cons-val")
+    <h2>Starting at the Value Level</h2>
+    @includeCode("app/list/Lists.scala", "list-trait-val")
+    @includeCode("app/list/Lists.scala", "nil-val")
+    @includeCode("app/list/Lists.scala", "cons-val")
 
-	@notesMd{
-		* in the implementation of `+` => the first + sums 2 Ints and the second + calls our method recursively on the tail IntList
-	}
+    @notesMd{
+        - in the implementation of `+` => the first + sums 2 Ints and the second + calls our method recursively on the tail IntList
+    }
 </section>
 
 <section>
-	<h2>The translation #1</h2>
-	@includeCode("app/list/Lists.scala", "list-trait-val")
-	@includeCode("app/list/Lists.scala", "list-trait-type")
-	
-	@notesMd {
-		- we promoted the size from a value level property to a type level property
-		- please note that the `+` method accepts an IntList which is tagged with the same size type parameter
-	}
+    <h2>The translation #1</h2>
+    @includeCode("app/list/Lists.scala", "list-trait-val")
+    @includeCode("app/list/Lists.scala", "list-trait-type")
+    
+    @notesMd {
+        - we promoted the size from a value level property to a type level property
+        - please note that the `+` method accepts an IntList which is tagged with the same size type parameter
+    }
+    @rules(3)
 </section>
 
 <section>
-	<h2>The translation #2</h2>
-	@includeCode("app/list/Lists.scala", "nil-val")
-	@includeCode("app/list/Lists.scala", "nil-type")
-	@notesMd {
-		- we can get rid of our requirement check
-	}
+    <h2>The translation #2</h2>
+    @includeCode("app/list/Lists.scala", "nil-val")
+    @includeCode("app/list/Lists.scala", "nil-type")
+    @notesMd {
+        - we can get rid of our requirement check
+    }
+    @rules(4)
 </section>
 
 <section>
-	<h2>The translation #3</h2>
-	@includeCode("app/list/Lists.scala", "cons-val")
-	@includeCode("app/list/Lists.scala", "cons-type")
-	<div class="fragment">
-		<p> An interesting detail: </p>
-		<img src="/assets/images/match_may_fail_warning.png" />		
-	</div>	
-	@notesMd {
-		- the class is tagged with the size of the tail
-		- then i pass the successor of the tail to the super constructor
-		- because if have no means to express a predecessor in my program
-	}
-</section>	
+    <h2>The translation #3</h2>
+    @includeCode("app/list/Lists.scala", "cons-val")
+    @includeCode("app/list/Lists.scala", "cons-type")
+    <div class="fragment" style="position:absolute; top:42%;color:red;">
+        <p> An interesting detail: </p>
+        <img src="/assets/images/match_may_fail_warning.png" style="margin-top:0;a"/>       
+    </div>  
+    @notesMd {
+        - the class is tagged with the size of the tail
+        - then i pass the successor of the tail to the super constructor
+        - because if have no means to express a predecessor in my program
+    }
+</section>  
 
 <section class="ultra-wide-slide">
-	<h2>Final Code</h2>
-	<div style="float:left; width: 46%; margin-left: 15px;">
-		@includeCode("app/list/ListExamples.scala", "list-trait-val")
-		@includeCode("app/list/ListExamples.scala", "nil-val")
-		@includeCode("app/list/ListExamples.scala", "cons-val")
-	</div>	
-	<div style="float:left; width: 46%; margin-left: 5px;">
-		@includeCode("app/list/ListExamples.scala", "list-trait-type", "margin-bottom: 38px;")
-		@includeCode("app/list/ListExamples.scala", "nil-type", "margin-bottom: 107px;")
-		@includeCode("app/list/ListExamples.scala", "cons-type")
-	</div>
-	@notesMd {
-		- the actual running code did not change at all
-		- we just elevated size from the value level to the type level
-	}
-</section>	
+    <h2>Final Code</h2>
+    <div style="float:left; width: 46%; margin-left: 15px;">
+        @includeCode("app/list/ListExamples.scala", "list-trait-val")
+        @includeCode("app/list/ListExamples.scala", "nil-val")
+        @includeCode("app/list/ListExamples.scala", "cons-val")
+    </div>  
+    <div style="float:left; width: 46%; margin-left: 5px;">
+        @includeCode("app/list/ListExamples.scala", "list-trait-type", "margin-bottom: 38px;")
+        @includeCode("app/list/ListExamples.scala", "nil-type", "margin-bottom: 107px;")
+        @includeCode("app/list/ListExamples.scala", "cons-type")
+    </div>
+    @notesMd {
+        - the actual running code did not change at all
+        - we just elevated size from the value level to the type level
+    }
+</section>  

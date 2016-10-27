@@ -1,54 +1,53 @@
 
 <section>
-	<h1>Our own Bool Type</h1>
-	<p>Or: The Hello World of Type Level Programming</p>
+    <h1>Our own Bool Type</h1>
+    <p>Or: The Hello World of Type Level Programming</p>
 </section>
 
 <section>
-	<h2>Starting at the Value Level</h2>
+    <h2>Starting at the Value Level</h2>
     @includeCode("app/bool/BooleanExamples.scala", "bool-trait")
     <div class="fragment">
-    	@includeCode("app/bool/BooleanExamples.scala", "bool-impl")
-    </div>	
+        @includeCode("app/bool/BooleanExamples.scala", "bool-impl")
+    </div>  
     <div class="fragment">
-    	@includeCode("app/bool/BooleanExamples.scala", "bool-ex1")
-    </div>	
+        @includeCode("app/bool/BooleanExamples.scala", "bool-ex1")
+    </div>  
 
     @notesMd{
-    	* as i said: We will start out by looking at hopefully simple examples at the Value Level
+        * as i said: We will start out by looking at hopefully simple examples at the Value Level
         * How would we implement our own Boolean Type if we had to?
-	}
-</section>
-
-<section>
-	<h2>Let's make it slightly more complicated</h2>
-	@includeCode("app/bool/BooleanExamples.scala", "bool-impl-2")
-	@notesMd{
-		* moved and-method to trait with a more complicated implementation
-		* I would not do it that way, but i just wanted to have a more complicated method to translate to the Type Level.
-	}
-</section>	
-
-<section>
-	<h2>The translation #1</h2>
-	@includeCode("app/bool/BooleanExamples.scala", "bool-val-trait-3")
-	@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
-
-    @rules(3)
-
-    @notesMd {
-     - we have omitted the and method for now
-     - we use the type keyword, because we are producing types instead of values now.
-     - Our computations happen at compile time instead of runtime.
-     - And instead of paramaters lists, we now use square brackets. If you want to formulate precisely, we defined some abstract types. Each type was defined with a type bound (<:). The or type is a so called type constructor, because we have to pass a type to it before we can construct an actual type.
     }
 </section>
 
 <section>
-	<h2>The translation #2</h2>
-	@includeCode("app/bool/Bools.scala", "false-val")
-	@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
-	@includeCode("app/bool/Bools.scala", "false-type")	
+    <h2>Let's make it slightly more complicated</h2>
+    @includeCode("app/bool/BooleanExamples.scala", "bool-impl-2")
+    @notesMd{
+        * moved and-method to trait with a more complicated implementation
+        * I would not do it that way, but i just wanted to have a more complicated method to translate to the Type Level.
+    }
+</section>  
+
+<section>
+    <h2>The translation #1</h2>
+    @includeCode("app/bool/BooleanExamples.scala", "bool-val-trait-3")
+    @includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
+
+    @rules(3)
+
+    @notesMd {
+        * we have omitted the and method for now
+        * we use the type keyword, because we are producing types instead of values now. Our computations happen at compile time instead of runtime.
+        * And instead of paramaters lists, we now use square brackets. If you want to formulate precisely, we defined some abstract types. Each type was defined with a type bound (<:). The or type is a so called type constructor, because we have to pass a type to it before we can construct an actual type.
+    }
+</section>
+
+<section>
+    <h2>The translation #2</h2>
+    @includeCode("app/bool/Bools.scala", "false-val")
+    @includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
+    @includeCode("app/bool/Bools.scala", "false-type")  
     
     @rules(4)
 
@@ -60,10 +59,10 @@
 </section>
 
 <section>
-	<h2>The translation #3</h2>	
-	@includeCode("app/bool/Bools.scala", "boolean-trait-val")
-	@includeCode("app/bool/Bools.scala", "boolean-trait-type")
-	
+    <h2>The translation #3</h2> 
+    @includeCode("app/bool/Bools.scala", "boolean-trait-val")
+    @includeCode("app/bool/Bools.scala", "boolean-trait-type")
+    
     @rules(6)
 
     @notesMd {
@@ -73,22 +72,22 @@
 </section>
 
 <section class="wide-slide">
-	<h2>Final Code</h2>
-	<div style="float:left; width: 48%;">
+    <h2>Final Code</h2>
+    <div style="float:left; width: 48%;">
         @includeCode("app/bool/BooleanExamples.scala", "bool-val-trait-4")   
         @includeCode("app/bool/Bools.scala", "true-val")
         @includeCode("app/bool/Bools.scala", "false-val")
     </div>  
     <div style="float:right; width: 48%;">
-		@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-4")	
-		@includeCode("app/bool/Bools.scala", "true-type")
-		@includeCode("app/bool/Bools.scala", "false-type")
-	</div>
+        @includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-4") 
+        @includeCode("app/bool/Bools.scala", "true-type")
+        @includeCode("app/bool/Bools.scala", "false-type")
+    </div>
 
     @notesMd {
         - Let's look at the final code and we can clearly see that the visual structures look pretty much the same.
     }
-</section>	
+</section>  
 
 <section>
     <h1> REPL Time <h1>
