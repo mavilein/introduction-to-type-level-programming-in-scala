@@ -16,10 +16,7 @@
 
     @notesMd{
     	* as i said: We will start out by looking at hopefully simple examples at the Value Level
-    	* trait somewhat like interfaces (multi inheritance, may have logic)
-    	* sealed not important here
-    	* methods are defined with def
-    	* return types are at the end of a method
+        * How would we implement our own Boolean Type if we had to?
 	}
 </section>
 
@@ -28,7 +25,7 @@
 	@includeCode("app/bool/BooleanExamples.scala", "bool-impl-2")
 	@notesMd{
 		* moved and-method to trait with a more complicated implementation
-		* i wanted to have a more complicated method to translate 
+		* I would not do it that way, but i just wanted to have a more complicated method to translate to the Type Level.
 	}
 </section>	
 
@@ -38,6 +35,13 @@
 	@includeCode("app/bool/BooleanExamples.scala", "bool-type-trait-3")    
 
     @rules(3)
+
+    @notesMd {
+     - we have omitted the and method for now
+     - we use the type keyword, because we are producing types instead of values now.
+     - Our computations happen at compile time instead of runtime.
+     - And instead of paramaters lists, we now use square brackets. If you want to formulate precisely, we defined some abstract types. Each type was defined with a type bound (<:). The or type is a so called type constructor, because we have to pass a type to it before we can construct an actual type.
+    }
 </section>
 
 <section>
@@ -47,6 +51,12 @@
 	@includeCode("app/bool/Bools.scala", "false-type")	
     
     @rules(4)
+
+    @notesMd {
+        - instead of a singleton object we are using a sealed trait, because we don't want a value anymore but a type.
+        - the True type is defined accordingly.
+        - The only thing that is really new in this case, is that we need to omit the return type (type bound), when we implement the abstract types.
+    }
 </section>
 
 <section>
@@ -55,6 +65,11 @@
 	@includeCode("app/bool/Bools.scala", "boolean-trait-type")
 	
     @rules(6)
+
+    @notesMd {
+        - If you want to be more precise again: The # is a so called type level projection. We use it to access types nested with in other types. 
+        - It is also possible to access nested types with the dot notation but then we would speak about path dependent types, which we don't want here (they are only relevant at the value level).
+    }
 </section>
 
 <section class="wide-slide">
@@ -69,16 +84,20 @@
 		@includeCode("app/bool/Bools.scala", "true-type")
 		@includeCode("app/bool/Bools.scala", "false-type")
 	</div>
+
+    @notesMd {
+        - Let's look at the final code and we can clearly see that the visual structures look pretty much the same.
+    }
 </section>	
 
 <section>
     <h1> REPL Time <h1>
     <img src="/assets/images/lets-get-the-party-started.jpg" />    
     @notesMd{
-        * try: True#not
-        * does not work because REPL is value oriented
-        * instead: assign result to a type
-        * does not quite work: we need tests!
+        * This is a picture of me taken after having written my first type level boolean. After having achieved that, i wanted to try it out in the REPL. So i fired it up and according to the rules typed in: False#not
+        * This fails with a weird error and i tried lots of things, until i realized that the REPL does not help us here. 
+        * A REPL wants to evaluate expressions, which results in values. But we are at the type level! So we need tests for our types to make sure that they actually work.
+        * Instead we must type: type x = False#not . Better but still not great. We need tests!
     }
 </section>    
 
@@ -99,10 +118,12 @@
         </div>
     </div>    
     @notesMd{
-        * we have to test our Types
-        * if it compiles we are fine
         * how do we prove things that should not compile => try "implicitly[False#not =:= False]"
         => Shapeless illTyped
+        * We have to test our Types. If it compiles we are fine.
+        * We use the standard scala method implicitly, which takes only one type as a parameter to abuse it as an assert on the type level. Inside the square brackets we see what should be asserted. We are using the =:= type bound. This makes that the left hand side of it, is a subtype of the right hand side. And it also makes sure that the right side is also a subtype of the left side. So it basically says, that these types should be equal.
+        * But how do we prove things that should not compile? => try "implicitly[False#not =:= False]"
+        * And on the lower right we can see how we can implement negative tests cases (things that should not compile). As we want our whole codebase to compile, we are using a clever macro from the shapeless library. We are passing a String to the macro, that it tries to compile. The macro is only happy, if the String does not compile. If the compiling of the String would succeed, we would get a compile error ourselves. Very irritating at first, but it is definitely useful.
     }
 </section>    
 

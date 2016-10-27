@@ -5,16 +5,24 @@
     </ul>
     <img src="/assets/images/motivation_general_types.png" />
     @notesMd{
-        * We want to catch more potential errors at compile time instead of runtime.
-        * Not just if we put in a number or sequence of characters.
-        * We want to add useful metadata to our code.
-        * I started with this one and a half weeks ago.
+        * Currently we are not getting the most out of our compilers. We rely mostly on simple type checking. For example we are not allowed to pass an Int to a method, which takes a String. 
+        * As type level programmers we want to catch more potential errors at compile time instead of runtime.
+        * Not just if we put in a number or sequence of characters. We want to add useful metadata to our code.
     }
 </section>
 
 <section>
     <h2> Our Problem for today</h2>
     <img src="/assets/images/motivation_our_problem.png" />
+    @notesMd {
+        * we see 2 lists that both contain 2 ints
+        * This is a custom List implementation only for Integers. It defines the method '+' which adds the elements of each list and produces a new list.
+        * can only work if the lists have the same size
+        * throws an Exception if the lists don't have the same size
+        * But we can clearly see that we trying to add a 2 element list and a 1 element list. That can never work. The compiler should spot that error for us!
+
+        * at the end of the talk we will have enhanced this implementation so this does not compile at all
+    }
 </section>    
 
 <section>
@@ -23,4 +31,7 @@
         <blockquote class="twitter-tweet" lang="de"><p>A hopeful vision for our future generations of developers <a href="http://t.co/f19NjrY2tk">pic.twitter.com/f19NjrY2tk</a></p>&mdash; mrb (@@mrb_bk) <a href="https://twitter.com/mrb_bk/status/524602194788884480">21. Oktober 2014</a></blockquote>
         <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
+    @notesMd {
+        * The message is: We want to write our programs in a way, that makes us very confident it will work, once it compiles - In Types we trust!
+    }
 </section>

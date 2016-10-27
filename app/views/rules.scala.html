@@ -3,10 +3,10 @@
 <ul>
 	<li><b>def x / val x @spaces(2) ==> type x</b></li>
 	@if(num >= 2) {
-		<li><b>x : T @spaces(20) ==> x <: T </b></li>
+		<li><b>x : T @spaces(17) ==> x <: T </b></li>
 	}
 	@if(num >= 3) {
-		<li><b>def foo(x : T) ==> type foo [x <: T]</b></li>
+		<li><b>def foo(x : T) @spaces(1) ==> type foo [x <: T]</b></li>
 	}
 	@if(num >= 4) {
 		<li>return type must be omitted</li>
