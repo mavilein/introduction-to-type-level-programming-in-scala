@@ -1,4 +1,4 @@
-package bool
+package peano
 
 object PeanoValExamples {
     import peano.PeanoVal._

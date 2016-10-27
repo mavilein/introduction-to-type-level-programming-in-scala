@@ -22,7 +22,8 @@ object ListVal {
     def +(other: IntList) = {
       require(other.size == size, "other has not the same size!")
       other match {
-        case ConsIntList(h, t) => (head + h) :: (tail + t)
+        case ConsIntList(otherHead: Int, otherTail: IntList) => 
+          (head + otherHead) :: (tail + otherTail)
       }
     }
     override def size = 1 + tail.size  
@@ -46,11 +47,12 @@ object ListType {
   //#nil-type
   //#cons-type
   case class ConsIntList[SizeTail <: Peano](head: Int, tail: IntList[SizeTail]) 
-    extends IntList[PeanoN[SizeTail]] { 
+                                                extends IntList[PeanoN[SizeTail]] { 
 
-    def +(other: IntList[PeanoN[SizeTail]]) =
+    def +(other: IntList[PeanoN[SizeTail]]) = 
       other match {
-        case ConsIntList(h, t) => (head + h) :: (tail + t)
+        case ConsIntList(otherHead, otherTail) => 
+          (head + otherHead) :: (tail + otherTail)
       }
   }
   //#cons-type
