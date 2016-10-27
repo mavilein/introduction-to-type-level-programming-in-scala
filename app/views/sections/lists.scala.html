@@ -4,18 +4,12 @@
 	<p>Or: How to constrain your Value Level Programs</p>
 	@notesMd{
 		* everything happened at compile time so far
-		* but maybe even type level programs want to have a running program?
+		* but maybe even we want to write a program that actually runs?
 	}
 </section>
 
 <section>
 	<h2>The Usecase</h2>
-	
-	<!-- <img src="https://www.dropbox.com/s/8r36j26z8yaasla/Screenshot%202014-11-13%2019.24.18.png?dl=1" />
-	<div class="fragment">
-		<p>We can do better than that!</p>
-		<img src="https://www.dropbox.com/s/lb0ko9zwnn7unjw/Screenshot%202014-11-13%2019.28.45.png?dl=1" />
-	</div>		 -->	
 	<img src="/assets/images/motivation_our_problem.png" />
 	<p>We can do better than that!</p>
 </section>	
@@ -23,6 +17,9 @@
 <section>
 	<h2>Lists in Functional Languages</h2>
 	<img src="/assets/images/Lists.jpg" />
+	@notesMd {
+		- many of you probably know that, but maybe you haven't come across it yet
+	}
 </section>	
 
 <section>
@@ -32,7 +29,7 @@
 	@includeCode("app/list/Lists.scala", "cons-val")
 
 	@notesMd{
-		* yeah we could implement everything in the trait, but this way it is easier to transport to type level
+		* in the implementation of `+` => the first + sums 2 Ints and the second + calls our method recursively on the tail IntList
 	}
 </section>
 
@@ -41,12 +38,19 @@
 	@includeCode("app/list/Lists.scala", "list-trait-val")
 	@includeCode("app/list/Lists.scala", "list-trait-type")
 	
+	@notesMd {
+		- we promoted the size from a value level property to a type level property
+		- please note that the `+` method accepts an IntList which is tagged with the same size type parameter
+	}
 </section>
 
 <section>
 	<h2>The translation #2</h2>
 	@includeCode("app/list/Lists.scala", "nil-val")
 	@includeCode("app/list/Lists.scala", "nil-type")
+	@notesMd {
+		- we can get rid of our requirement check
+	}
 </section>
 
 <section>
@@ -57,15 +61,12 @@
 		<p> An interesting detail: </p>
 		<img src="/assets/images/match_may_fail_warning.png" />		
 	</div>	
-</section>	
-
-<!-- <section>
-	<h2>REPL TIME</h2>
-	@notesMd{
-		- show compiler warnings for non exhaustive match
-		- show how to fix it for type level implementation
+	@notesMd {
+		- the class is tagged with the size of the tail
+		- then i pass the successor of the tail to the super constructor
+		- because if have no means to express a predecessor in my program
 	}
-</section>	 -->
+</section>	
 
 <section class="ultra-wide-slide">
 	<h2>Final Code</h2>
@@ -79,4 +80,8 @@
 		@includeCode("app/list/ListExamples.scala", "nil-type", "margin-bottom: 107px;")
 		@includeCode("app/list/ListExamples.scala", "cons-type")
 	</div>
+	@notesMd {
+		- the actual running code did not change at all
+		- we just elevated size from the value level to the type level
+	}
 </section>	

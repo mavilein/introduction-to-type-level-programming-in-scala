@@ -7,10 +7,6 @@
 	}
 </section>
 
-<!-- <section>
-	<h2>What are Peano Numbers?</h2>
-</section>		 -->
-
 <section>
 	<h2>Starting at the Value Level</h2>
 	@includeCode("app/peano/Peanos.scala", "peano-trait-val")
@@ -24,6 +20,7 @@
 	<img src="/assets/images/Peanos.jpg" class="fragment"/>
 	@notesMd{
 		- actual value is determined by the number of predecessors
+		- the add method wraps the other Peano number if PeanoN until it reaches zero
 	}
 </section>
 
@@ -33,6 +30,10 @@
 	@includeCode("app/peano/Peanos.scala", "peano-trait-type")
 	
     @rules(3)
+    @notesMd {
+    	- we start by translating the interface again
+    	- nothing new here rules wise
+	}
 </section>
 
 <section>
@@ -41,10 +42,6 @@
 	@includeCode("app/peano/Peanos.scala", "zero-type")
 	
     @rules(4)
-    @notesMd{
-    	- instead of the normal constructor to create an instance/value
-    	- we use something similar: a type constructor
-	}
 </section>
 
 <section>
@@ -72,6 +69,10 @@
 		@includeCode("app/peano/Peanos.scala", "zero-type")
 		@includeCode("app/peano/Peanos.scala", "peanon-type")
 	</div>
+	@notesMd {
+		- the new things are the constructor and the recursion at the type level
+		- the key message is: if you can recurse on the value level, you can also do it on the type level
+	}
 </section>	
 
 <section>
@@ -79,7 +80,6 @@
 	@includeCode("test/peano/PeanoSpecs.scala", "peano-val-spec-1")
 	@includeCode("test/peano/PeanoSpecs.scala", "peano-type-spec-1")
 	@notesMd{
-		* nothing new here
-		* the key message is: if you can recurse on the value level, you can also do it on the type level
+		- the only important thing is that my test cases made sure the add is commutative
 	}
 </section>	
